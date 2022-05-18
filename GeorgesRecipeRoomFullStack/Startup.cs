@@ -1,9 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.IdentityModel.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using GeorgesRecipeRoomFullStack.Repositories;
 
 namespace GeorgesRecipeRoomFullStack
 {
@@ -19,9 +23,10 @@ namespace GeorgesRecipeRoomFullStack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
-            services.AddTransient<IRecipeRepository, RecipeRepository>();
+            //services.AddTransient<IRecipeRepository, RecipeRepository>();
+            //services.AddTransient<ITagRepository, TagRepository>();
+
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
@@ -41,38 +46,47 @@ namespace GeorgesRecipeRoomFullStack
                 });
 
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Georges Recipe Room", Version = "v1" });
 
-            var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
-            var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
-            services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+                var securitySchema = new OpenApiSecurityScheme
                 {
-                    options.Authority = googleTokenUrl;
-                    options.TokenValidationParameters = new TokenValidationParameters
+                    Name = "Authorization",
+                    BearerFormat = "JWT",
+                    Description = "JWT Authorization header using the Bearer scheme.",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Reference = new OpenApiReference
                     {
-                        ValidateIssuer = true,
-                        ValidIssuer = googleTokenUrl,
-                        ValidateAudience = true,
-                        ValidAudience = firebaseProjectId,
-                        ValidateLifetime = true
-                    };
-                });
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme,
+                    }
+                };
 
-            // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+                c.AddSecurityDefinition("Bearer", securitySchema);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    { securitySchema, new[] { "Bearer"} }
+                });
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GeorgesRecipeRoomFullStack v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Georges Recipe Room v1"));
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -82,3 +96,4 @@ namespace GeorgesRecipeRoomFullStack
         }
     }
 }
+
