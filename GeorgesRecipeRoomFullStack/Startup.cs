@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+<<<<<<< HEAD
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+=======
+using Microsoft.IdentityModel.Tokens;
+>>>>>>> 16cc6105359094fd769dbb90602d40412faa5a47
 using GeorgesRecipeRoomFullStack.Repositories;
 
 namespace GeorgesRecipeRoomFullStack
@@ -23,10 +27,16 @@ namespace GeorgesRecipeRoomFullStack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+<<<<<<< HEAD
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             //services.AddTransient<IRecipeRepository, RecipeRepository>();
             //services.AddTransient<ITagRepository, TagRepository>();
 
+=======
+            //services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            //services.AddTransient<IRecipeRepository, RecipeRepository>();
+>>>>>>> 16cc6105359094fd769dbb90602d40412faa5a47
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
@@ -46,6 +56,7 @@ namespace GeorgesRecipeRoomFullStack
                 });
 
             services.AddControllers();
+<<<<<<< HEAD
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Georges Recipe Room", Version = "v1" });
@@ -70,6 +81,8 @@ namespace GeorgesRecipeRoomFullStack
                     { securitySchema, new[] { "Bearer"} }
                 });
             });
+=======
+>>>>>>> 16cc6105359094fd769dbb90602d40412faa5a47
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
