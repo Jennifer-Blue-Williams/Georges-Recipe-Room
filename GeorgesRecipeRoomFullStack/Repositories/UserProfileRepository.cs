@@ -2,10 +2,11 @@
 using GeorgesRecipeRoomFullStack.Models;
 using GeorgesRecipeRoomFullStack.Utils;
 using GeorgesRecipeRoomFullStack.Repositories;
+using System.Collections.Generic;
 
-namespace Tabloid.Repositories
+namespace GeorgesRecipeRoomFullStack.Repositories
 {
-    public class UserProfileRepository : BaseRepository, IUserProfileRepository, IUserProfileRepository
+    public class UserProfileRepository : BaseRepository, IUserProfileRepository
     {
         public UserProfileRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -68,6 +69,21 @@ namespace Tabloid.Repositories
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
+        }
+
+        public List<UserProfile> GetAll()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public UserProfile GetById(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
         }
 
         /*
