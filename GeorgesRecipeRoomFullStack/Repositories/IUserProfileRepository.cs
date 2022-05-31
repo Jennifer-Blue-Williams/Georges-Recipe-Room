@@ -10,5 +10,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
         List<UserProfile> GetAll();
         UserProfile GetById(int id);
         void Delete(int id);
+        UserProfile GetUser(string userName);
+        void Update(UserProfile userProfile);
     }
 }
