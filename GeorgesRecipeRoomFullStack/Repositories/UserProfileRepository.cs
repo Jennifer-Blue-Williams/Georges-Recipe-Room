@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using GeorgesRecipeRoomFullStack.Models;
 using GeorgesRecipeRoomFullStack.Utils;
-using GeorgesRecipeRoomFullStack.Repositories;
 using System.Collections.Generic;
 
 namespace GeorgesRecipeRoomFullStack.Repositories
@@ -82,6 +81,16 @@ namespace GeorgesRecipeRoomFullStack.Repositories
         }
 
         public void Delete(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public UserProfile GetUser(string userName)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(UserProfile userProfile)
         {
             throw new System.NotImplementedException();
         }
