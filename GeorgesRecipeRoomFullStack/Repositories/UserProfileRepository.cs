@@ -17,8 +17,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, Up.FirebaseUserId, up.Name, up.LastName, up.DisplayName, 
-                               up.Email, up.CreateDateTime,
+                        SELECT up.Id, Up.FirebaseUserId, up.Name, up.Email
                                
                           FROM UserProfile up
                          WHERE FirebaseUserId = @FirebaseuserId";
@@ -37,7 +36,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                             Name = DbUtils.GetString(reader, "Name"),
 
                             Email = DbUtils.GetString(reader, "Email"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                          
 
                         };
                     }
