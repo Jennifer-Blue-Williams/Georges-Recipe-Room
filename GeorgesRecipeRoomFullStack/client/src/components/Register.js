@@ -43,14 +43,6 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </FormGroup>
-        {/* <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
-          <Input
-            id="imageLocation"
-            type="text"
-            onChange={(e) => setImageLocation(e.target.value)}
-          />
-        </FormGroup> */}
         <FormGroup>
           <Label for="password">Password</Label>
           <Input
