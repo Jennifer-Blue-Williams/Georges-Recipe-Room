@@ -11,7 +11,7 @@ export default function Login() {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    login(email, password)
+    ogin(email, password)
       .then(() => history.push("/"))
       .catch(() => alert("Invalid email or password"));
   };

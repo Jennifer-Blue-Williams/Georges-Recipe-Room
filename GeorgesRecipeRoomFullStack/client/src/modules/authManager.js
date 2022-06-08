@@ -1,76 +1,73 @@
-import React, { useState } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { useHistory } from "react-router-dom";
-import { register } from "../modules/authManager";
+import firebase from "firebase/app";
+import "firebase/auth";
 
-export default function Register() {
-  const history = useHistory();
+const _apiUrl = "/api/userprofile";
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfirmPassword] = useState();
-
-  const registerClick = (e) => {
-    e.preventDefault();
-    if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
-    } else {
-      const userProfile = {
-        name,
-        email,
-      };
-      register(userProfile, password).then(() => history.push("/"));
-    }
-  };
-
-  return (
-    <Form onSubmit={registerClick}>
-      <fieldset>
-        <FormGroup>
-          <Label htmlFor="name">Name</Label>
-          <Input
-            id="name"
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            id="email"
-            type="text"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        {/* <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
-          <Input
-            id="imageLocation"
-            type="text"
-            onChange={(e) => setImageLocation(e.target.value)}
-          />
-        </FormGroup> */}
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPassword">Confirm Password</Label>
-          <Input
-            id="confirmPassword"
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Button>Register</Button>
-        </FormGroup>
-      </fieldset>
-    </Form>
+const _doesUserExist = (firebaseUserId) => {
+  return getToken().then((token) =>
+    fetch(`${_apiUrl}/DoesUserExist/${firebaseUserId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => resp.ok)
   );
-}
+};
+
+const _saveUser = (userProfile) => {
+  return getToken().then((token) =>
+    fetch(_apiUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userProfile),
+    }).then((resp) => resp.json())
+  );
+};
+
+export const getToken = () => firebase.auth().currentUser.getIdToken();
+
+export const login = (email, pw) => {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(email, pw)
+    .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
+    .then((doesUserExist) => {
+      if (!doesUserExist) {
+        // If we couldn't find the user in our app's database, we should logout of firebase
+        logout();
+
+        throw new Error(
+          "Something's wrong. The user exists in firebase, but not in the application database."
+        );
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      throw err;
+    });
+};
+
+export const logout = () => {
+  firebase.auth().signOut();
+};
+
+export const register = (userProfile, password) => {
+  return firebase
+    .auth()
+    .createUserWithEmailAndPassword(userProfile.email, password)
+    .then((createResponse) =>
+      _saveUser({
+        ...userProfile,
+        firebaseUserId: createResponse.user.uid,
+      })
+    );
+};
+
+export const onLoginStatusChange = (onLoginStatusChangeHandler) => {
+  firebase.auth().onAuthStateChanged((user) => {
+    onLoginStatusChangeHandler(!!user);
+  });
+};
