@@ -20,7 +20,7 @@ export default function Register() {
         name,
         email,
       };
-      register(userProfile, password).then(() => history.push("/"));
+      register(userProfile, password).then(() => history.push("/register"));
     }
   };
 
