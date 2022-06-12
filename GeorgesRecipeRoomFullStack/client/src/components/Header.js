@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { NavLink as RRNavLink } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
+// import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -11,39 +11,30 @@ import {
   NavLink,
 } from "reactstrap";
 import { logout } from "../modules/authManager";
+import { register } from "../modules/authManager";
 
 export default function Header({ isLoggedIn }) {
-  const history = useHistory();
+  // const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const handleLogout = () => {
-    logout();
-  };
+  // const handleLogout = () => {
+  //   logout();
+  // };
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">
-          George's Recipe Room
-        </NavbarBrand>
+        <NavbarBrand href="/">George's Recipe Room</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             {isLoggedIn && (
               <>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/">
-                    Home
-                  </NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
+
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/recipes">
-                    Recipes
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/myProfile">
-                    My Profile
-                  </NavLink>
+                  <NavLink href="/recipes">Recipes</NavLink>
                 </NavItem>
               </>
             )}
@@ -56,7 +47,7 @@ export default function Header({ isLoggedIn }) {
                     aria-current="page"
                     className="nav-link"
                     style={{ cursor: "pointer" }}
-                    onClick={handleLogout}
+                    onClick={logout}
                   >
                     Logout
                   </a>
@@ -65,16 +56,12 @@ export default function Header({ isLoggedIn }) {
             )}
             {!isLoggedIn && (
               <>
-                {/* <NavItem>
-                  <NavLink tag={RRNavLink} to="/login">
-                    Login
-                  </NavLink>
+                <NavItem>
+                  <NavLink href="/login">Login</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/register">
-                    Register
-                  </NavLink>
-                </NavItem> */}
+                  <NavLink href="/register">Register</NavLink>
+                </NavItem>
               </>
             )}
           </Nav>

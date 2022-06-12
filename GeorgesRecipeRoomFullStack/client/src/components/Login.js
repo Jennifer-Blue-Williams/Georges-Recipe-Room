@@ -11,7 +11,7 @@ export default function Login() {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    ogin(email, password)
+    login(email, password)
       .then(() => history.push("/"))
       .catch(() => alert("Invalid email or password"));
   };
@@ -40,7 +40,7 @@ export default function Login() {
           <Button>Login</Button>
         </FormGroup>
         <em>
-          Not registered? <Link to="register">Register</Link>
+          New Chef? <Link to="register">Register Here!</Link>
         </em>
       </fieldset>
     </Form>
