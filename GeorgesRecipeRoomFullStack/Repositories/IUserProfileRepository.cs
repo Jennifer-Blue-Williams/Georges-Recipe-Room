@@ -7,10 +7,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
     {
         void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);
-        List<UserProfile> GetAll();
-        UserProfile GetById(int id);
-        void Delete(int id);
+        //List<UserProfile> GetAll();
+        //UserProfile GetById(int id);
+        //void Delete(int id);
         UserProfile GetUser(string userName);
-        void Update(UserProfile userProfile);
+        //void Update(UserProfile userProfile);
     }
 }

@@ -66,44 +66,29 @@ namespace GeorgesRecipeRoomFullStack.Repositories
             }
         }
 
-        public List<UserProfile> GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
+        //public List<UserProfile> GetAll()
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
-        public UserProfile GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public UserProfile GetById(int id)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
-        public void Delete(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public void Delete(int id)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
         public UserProfile GetUser(string userName)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Update(UserProfile userProfile)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        /*
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
-        {
-            return _context.UserProfile
-                       .Include(up => up.UserType) 
-                       .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
-        }
-
-        public void Add(UserProfile userProfile)
-        {
-            _context.Add(userProfile);
-            _context.SaveChanges();
-        }
-        */
+        //public void Update(UserProfile userProfile)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }
