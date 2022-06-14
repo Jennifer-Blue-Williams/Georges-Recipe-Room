@@ -53,14 +53,13 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, Name, Email, CreateDateTime,)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, Name, Email)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @Name, 
-                                                @Email, @CreateDateTime)";
+                                                @Email)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
