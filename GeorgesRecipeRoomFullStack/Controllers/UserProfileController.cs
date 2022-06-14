@@ -78,9 +78,8 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
-            UserProfile newUser = userProfile;
-            newUser.CreateDateTime = DateTime.Now;
-            _userProfileRepository.Add(newUser);
+            
+            _userProfileRepository.Add(userProfile);
             return CreatedAtAction("Get", new { userName = userProfile.Name }, userProfile);
         }
 
