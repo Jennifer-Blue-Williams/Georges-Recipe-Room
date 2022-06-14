@@ -83,24 +83,24 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return CreatedAtAction("Get", new { userName = userProfile.Name }, userProfile);
         }
 
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, UserProfile userProfile)
-        {
-            if (id != userProfile.Id)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public IActionResult Put(int id, UserProfile userProfile)
+        //{
+        //    if (id != userProfile.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _userProfileRepository.Update(userProfile);
-            return NoContent();
-        }
+        //    _userProfileRepository.Update(userProfile);
+        //    return NoContent();
+        //}
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _userProfileRepository.Delete(id);
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    _userProfileRepository.Delete(id);
+        //    return NoContent();
+        //}
         private string GetCurrentUserProfileId()
         {
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
