@@ -6,7 +6,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
     public interface IRecipeRepository
     {
         List<Recipe> GetAllRecipes();
-        //Recipe GetRecipe(int id);
+        Recipe GetRecipe(int id);
         //List<Recipe> HomepageRecipes();
         //void Delete(int id);
         //void Add(Recipe recipe);
