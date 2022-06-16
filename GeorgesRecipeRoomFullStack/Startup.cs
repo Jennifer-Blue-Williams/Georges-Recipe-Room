@@ -24,7 +24,7 @@ namespace GeorgesRecipeRoomFullStack
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
-            //services.AddTransient<IRecipeRepository, RecipeRepository>();
+            services.AddTransient<IRecipeRepository, RecipeRepository>();
             //services.AddTransient<ITagRepository, TagRepository>();
 
 
