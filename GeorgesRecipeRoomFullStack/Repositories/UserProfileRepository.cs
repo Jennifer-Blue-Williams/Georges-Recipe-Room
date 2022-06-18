@@ -2,6 +2,7 @@
 using GeorgesRecipeRoomFullStack.Models;
 using GeorgesRecipeRoomFullStack.Utils;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace GeorgesRecipeRoomFullStack.Repositories
 {
@@ -17,31 +18,31 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, up.FirebaseUserId, up.Name, up.Email 
+                        SELECT Id, FirebaseUserId, Name, Email 
                         FROM UserProfile up
                         WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
-                    UserProfile userProfile = null;
-
-                    var reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        userProfile = new UserProfile()
+
+                        UserProfile user = null;
+                    
+                        if (reader.Read())
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                            Name = DbUtils.GetString(reader, "Name"),
+                            user = new UserProfile()
+                            {
+                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Name = DbUtils.GetString(reader, "Name"),
+                                Email = DbUtils.GetString(reader, "Email")
+                            };
+                        }
+                        reader.Close();
 
-                            Email = DbUtils.GetString(reader, "Email"),
-                          
-
-                        };
+                        return user;
                     }
-                    reader.Close();
-
-                    return userProfile;
                 }
             }
         }
@@ -66,29 +67,12 @@ namespace GeorgesRecipeRoomFullStack.Repositories
             }
         }
 
-        //public List<UserProfile> GetAll()
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
         //public UserProfile GetById(int id)
         //{
         //    throw new System.NotImplementedException();
         //}
 
-        //public void Delete(int id)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-        public UserProfile GetUser(string userName)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        //public void Update(UserProfile userProfile)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-    }
-}
+                    }
+                }
+            
+        
