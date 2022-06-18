@@ -9,7 +9,7 @@ namespace GeorgesRecipeRoomFullStack.Models
     {
         public int Id { get; set; }
 
-        [StringLength(28, MinimumLength = 28)]
+        //[StringLength(28, MinimumLength = 28)]
         public string FirebaseUserId { get; set; }
 
         [Required]

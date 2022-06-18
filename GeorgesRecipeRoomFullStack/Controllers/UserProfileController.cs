@@ -62,18 +62,18 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok(false);
         }
 
-        [HttpGet("MyProfile")]
-        public IActionResult GetMyProfile()
-        {
-            var user = _userProfileRepository.GetByFirebaseUserId(GetCurrentUserProfileId());
-            //List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
-            //user.Tags = tags;
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
+        //[HttpGet("MyProfile")]
+        //public IActionResult GetMyProfile()
+        //{
+        //    var user = _userProfileRepository.GetByFirebaseUserId(GetCurrentUserProfileId());
+        //    //List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
+        //    //user.Tags = tags;
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(user);
+        //}
 
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
@@ -101,10 +101,10 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         //    _userProfileRepository.Delete(id);
         //    return NoContent();
         //}
-        private string GetCurrentUserProfileId()
-        {
-            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return id;
-        }
+        //private string GetCurrentUserProfileId()
+        //{
+        //    string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    return id;
+        //}
     }
 }
