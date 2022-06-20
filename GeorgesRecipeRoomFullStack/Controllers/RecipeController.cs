@@ -56,8 +56,8 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         [HttpPost]
         public IActionResult Post(Recipe recipe)
         {
-            UserProfile currentUser = GetCurrentUserProfile();
-            recipe.UserProfileId = currentUser.Id;
+            //UserProfile currentUser = GetCurrentUserProfile();
+            //recipe.UserProfileId = currentUser.Id;
             _recipeRepo.Add(recipe);
             int newRecipeId = recipe.Id;
             foreach (int tagId in recipe.SelectedTagIds)
@@ -68,8 +68,9 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok(recipe);
         }
 
-        [HttpPut]
-        public IActionResult Update(Recipe recipe)
+        [HttpPut("{id}")]
+
+        public IActionResult Update(int id, Recipe recipe)
         {
             _recipeRepo.Update(recipe);
             int recipeId = recipe.Id;
@@ -80,10 +81,10 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             }
             return Ok(recipe);
         }
-        private UserProfile GetCurrentUserProfile()
-        {
-            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _userRepo.GetByFirebaseUserId(firebaseUserId);
-        }
+        //private UserProfile GetCurrentUserProfile()
+        //{
+        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    return _userRepo.GetByFirebaseUserId(firebaseUserId);
+        //}
     }
 }

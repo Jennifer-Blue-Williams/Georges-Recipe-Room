@@ -106,10 +106,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                     cmd.CommandText = @"INSERT INTO Recipe ([Title], Directions, ImageUrl, UserProfileId)
                                         OUTPUT INSERTED.ID
                                         VALUES (@title, @directions, @ImageUrl, @UserProfileId)";
-                    DbUtils.AddParameter(cmd, "@name", recipe.Title);
-                    DbUtils.AddParameter(cmd, "@description", recipe.Directions);
-                    DbUtils.AddParameter(cmd, "@instructions", recipe.ImageUrl);
-                    DbUtils.AddParameter(cmd, "@preptime", recipe.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@title", recipe.Title);
+                    DbUtils.AddParameter(cmd, "@directions", recipe.Directions);
+                    DbUtils.AddParameter(cmd, "@imageUrl", recipe.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", recipe.UserProfileId);
                     recipe.Id = (int)cmd.ExecuteScalar();
                 }
             }
@@ -142,12 +142,12 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                     cmd.CommandText = @"UPDATE Recipe
                                         SET Title = @Title,
                                             Directions = @directions,
-                                            ImageUrl = @imageUrl,
+                                            ImageUrl = @imageUrl
                                         WHERE Id = @id";
                     DbUtils.AddParameter(cmd, "@id", recipe.Id);
                     DbUtils.AddParameter(cmd, "@title", recipe.Title);
-                    DbUtils.AddParameter(cmd, "@description", recipe.Directions);
-                    DbUtils.AddParameter(cmd, "@instructions", recipe.ImageUrl);
+                    DbUtils.AddParameter(cmd, "@directions", recipe.Directions);
+                    DbUtils.AddParameter(cmd, "@imageUrl", recipe.ImageUrl);
 
                     cmd.ExecuteNonQuery();
                 }
