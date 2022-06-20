@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -9,7 +10,7 @@ namespace GeorgesRecipeRoomFullStack.Models
     {
         public int Id { get; set; }
 
-        [StringLength(28, MinimumLength = 28)]
+        //[StringLength(28, MinimumLength = 28)]
         public string FirebaseUserId { get; set; }
 
         [Required]

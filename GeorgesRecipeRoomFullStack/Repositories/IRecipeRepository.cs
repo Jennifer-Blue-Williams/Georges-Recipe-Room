@@ -8,10 +8,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
         List<Recipe> GetAllRecipes();
         Recipe GetRecipe(int id);
         //List<Recipe> HomepageRecipes();
-        //void Delete(int id);
-        //void Add(Recipe recipe);
-        //void Update(Recipe recipe);
-        //void AddRecipeTags(int tagId, int recipeId);
-        //Recipe GetToEdit(int id);
+        void Delete(int id);
+        void Add(Recipe recipe);
+        void Update(Recipe recipe);
+        void AddRecipeTags(int tagId, int recipeId);
+        Recipe GetToEdit(int id);
     }
 }

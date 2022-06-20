@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
@@ -18,10 +19,11 @@ namespace GeorgesRecipeRoomFullStack.Models
 
         [DisplayName("Food Image")]
         public string ImageUrl { get; set; }
-        
-        //public List<Tag> Tags { get; set; }
+
+        public List<Tag> Tags { get; set; }
         public int UserProfileId { get; set; }
-        public UserProfile Profile { get; set; }
+        //public UserProfile Profile { get; set; }
+        public List<int> SelectedTagIds { get; set; }
     }
 }
 

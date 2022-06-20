@@ -13,12 +13,12 @@ namespace GeorgesRecipeRoomFullStack.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        //private readonly ITagRepository _tagRepository;
+        private readonly ITagRepository _tagRepository;
 
-        public UserProfileController(IUserProfileRepository userProfileRepository)
+        public UserProfileController(IUserProfileRepository userProfileRepository, ITagRepository tagRepository)
         {
             _userProfileRepository = userProfileRepository;
-            //_tagRepository = tagRepository;
+            _tagRepository = tagRepository;
         }
 
         [HttpGet("{firebaseUserId}")]
@@ -38,73 +38,13 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok();
         }
 
-        [HttpGet("Profile/{userName}")]
-        public IActionResult Get(string userName)
-        {
-            var user = _userProfileRepository.GetUser(userName);
-            //List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
-            //user.Tags = tags;
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
-
-        [HttpGet("Profile/Register/{userName}")]
-        public IActionResult Verify(string userName)
-        {
-            var user = _userProfileRepository.GetUser(userName);
-            if (user == null)
-            {
-                return Ok(true);
-            }
-            return Ok(false);
-        }
-
-        [HttpGet("MyProfile")]
-        public IActionResult GetMyProfile()
-        {
-            var user = _userProfileRepository.GetByFirebaseUserId(GetCurrentUserProfileId());
-            //List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
-            //user.Tags = tags;
-            if (user == null)
-            {
-                return NotFound();
-            }
-            return Ok(user);
-        }
-
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
             
             _userProfileRepository.Add(userProfile);
-            return CreatedAtAction("Get", new { userName = userProfile.Name }, userProfile);
+            return Ok(userProfile);
         }
 
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, UserProfile userProfile)
-        //{
-        //    if (id != userProfile.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _userProfileRepository.Update(userProfile);
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _userProfileRepository.Delete(id);
-        //    return NoContent();
-        //}
-        private string GetCurrentUserProfileId()
-        {
-            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return id;
-        }
     }
 }
