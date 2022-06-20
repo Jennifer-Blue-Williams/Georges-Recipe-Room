@@ -38,34 +38,6 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok();
         }
 
-        //[HttpGet("Profile/{userName}")]
-        //public IActionResult Get(string userName)
-        //{
-        //    var user = _userProfileRepository.GetUser(userName);
-        //    List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
-        //    user.Tags = tags;
-        //    if (user == null)
-        //    {
-
-        //        return NotFound();
-        //    }
-        //    return Ok(user);
-        //}
-
-
-        //[HttpGet("MyProfile")]
-        //public IActionResult GetMyProfile()
-        //{
-        //    var user = _userProfileRepository.GetByFirebaseUserId(GetCurrentUserProfileId());
-        //    //List<Tag> tags = _tagRepository.GetTagsByUser(user.Id);
-        //    //user.Tags = tags;
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(user);
-        //}
-
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
@@ -73,18 +45,6 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             _userProfileRepository.Add(userProfile);
             return Ok(userProfile);
         }
-
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, UserProfile userProfile)
-        //{
-        //    if (id != userProfile.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _userProfileRepository.Update(userProfile);
-        //    return NoContent();
-        //}
 
     }
 }

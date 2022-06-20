@@ -33,10 +33,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Directions = DbUtils.GetString(reader, "Directions"),
                                 ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                Profile = new UserProfile()
-                                {
-                                    Name = DbUtils.GetString(reader, "Name"),
-                                }
+                                //Profile = new UserProfile()
+                                //{
+                                //    Name = DbUtils.GetString(reader, "Name"),
+                                //}
                             });
                         }
 
@@ -72,10 +72,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                     Title = DbUtils.GetString(reader, "Title"),
                                     Directions = DbUtils.GetString(reader, "Directions"),
                                     ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                    Profile = new UserProfile()
-                                    {
-                                        Name = DbUtils.GetString(reader, "Name"),
-                                    }
+                                    //Profile = new UserProfile()
+                                    //{
+                                    //    Name = DbUtils.GetString(reader, "Name"),
+                                    //}
                                 };
                             }
                             return recipe;

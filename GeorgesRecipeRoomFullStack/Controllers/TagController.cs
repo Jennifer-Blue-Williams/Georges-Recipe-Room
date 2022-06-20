@@ -9,7 +9,6 @@ using System.Security.Claims;
 
 namespace GeorgesRecipeRoomFullStack.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TagController : ControllerBase

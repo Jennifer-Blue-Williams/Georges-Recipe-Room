@@ -22,7 +22,7 @@ namespace GeorgesRecipeRoomFullStack.Models
 
         public List<Tag> Tags { get; set; }
         public int UserProfileId { get; set; }
-        public UserProfile Profile { get; set; }
+        //public UserProfile Profile { get; set; }
         public List<int> SelectedTagIds { get; set; }
     }
 }

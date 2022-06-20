@@ -67,12 +67,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
             }
         }
 
-        //public UserProfile GetById(int id)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
-
-                    }
-                }
+    }
+}
             
         

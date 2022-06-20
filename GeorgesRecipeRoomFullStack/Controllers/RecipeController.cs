@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 namespace GeorgesRecipeRoomFullStack.Controllers
 {
-    //[Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class RecipeController : ControllerBase
@@ -35,8 +35,8 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         public IActionResult Get(int id)
         {
             Recipe recipe = _recipeRepo.GetRecipe(id);
-            List<Tag> tags = _tagRepo.GetTagsByRecipe(id);
-            recipe.Tags = tags;
+            //List<Tag> tags = _tagRepo.GetTagsByRecipe(id);
+            //recipe.Tags = tags;
             return Ok(recipe);
         }
 
