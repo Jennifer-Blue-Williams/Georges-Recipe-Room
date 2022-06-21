@@ -19,7 +19,7 @@ export const getAllRecipes = () => {
   });
 };
 
-export const getRacipeDetailsById = (id) => {
+export const getRecipeDetailsById = (id) => {
   return getToken().then((token) => {
     return fetch(`${_apiUrl}/${id}`, {
       method: "GET",
@@ -83,7 +83,7 @@ export const getRecipeToEdit = (id) => {
   });
 };
 
-export const editRecipe = (recipe) => {
+export const editRecipeById = (recipe) => {
   return getToken().then((token) => {
     return fetch(_apiUrl, {
       method: "PUT",

@@ -21,7 +21,8 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                         FROM Recipe r 
                                         LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
                                         LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
-                                        LEFT JOIN UserProfile u on u.Id = r.UserProfileId";
+                                        LEFT JOIN UserProfile u on u.Id = r.UserProfileId
+                                        Where u.Id = r.UserProfileId";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
