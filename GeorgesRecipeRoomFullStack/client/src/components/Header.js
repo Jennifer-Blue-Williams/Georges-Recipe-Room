@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
-// import { NavLink as RRNavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -14,12 +14,12 @@ import { logout } from "../modules/authManager";
 import { register } from "../modules/authManager";
 
 export default function Header({ isLoggedIn }) {
-  // const history = useHistory();
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  // const handleLogout = () => {
-  //   logout();
-  // };
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -34,7 +34,7 @@ export default function Header({ isLoggedIn }) {
                 </NavItem>
 
                 <NavItem>
-                  <NavLink href="/recipes">Recipes</NavLink>
+                  <NavLink href="/recipes">My Recipes</NavLink>
                 </NavItem>
               </>
             )}
@@ -47,7 +47,7 @@ export default function Header({ isLoggedIn }) {
                     aria-current="page"
                     className="nav-link"
                     style={{ cursor: "pointer" }}
-                    onClick={logout}
+                    onClick={handleLogout}
                   >
                     Logout
                   </a>
