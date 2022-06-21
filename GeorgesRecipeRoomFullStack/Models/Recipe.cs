@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+
 
 namespace GeorgesRecipeRoomFullStack.Models
 {
@@ -22,8 +20,9 @@ namespace GeorgesRecipeRoomFullStack.Models
 
         public List<Tag> Tags { get; set; }
         public int UserProfileId { get; set; }
-        //public UserProfile Profile { get; set; }
         public List<int> SelectedTagIds { get; set; }
+        public Tag Tag { get; internal set; }
+       
     }
 }
 

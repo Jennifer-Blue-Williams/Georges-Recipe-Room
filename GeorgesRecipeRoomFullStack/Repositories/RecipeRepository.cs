@@ -17,8 +17,10 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, r.UserProfileId, u.Name
+                    cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, u.Name, t.Id AS TagId, T.[Label] AS TagName
                                         FROM Recipe r 
+                                        LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
+                                        LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
                                         LEFT JOIN UserProfile u on u.Id = r.UserProfileId";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -33,11 +35,13 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Directions = DbUtils.GetString(reader, "Directions"),
                                 ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                //Profile = new UserProfile()
-                                //{
-                                //    Name = DbUtils.GetString(reader, "Name"),
-                                //}
-                            });
+                                Tag = new Tag()
+                                {
+                                    Id = DbUtils.GetInt(reader, "TagId"),
+                                    Label = DbUtils.GetString(reader, "TagName"),
+                                },
+                               
+                            }) ;
                         }
 
                         return recipes;
@@ -53,10 +57,13 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                     conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, r.UserProfileId, u.Name
+                        cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, r.UserProfileId, u.Name, t.Id AS TagId, T.[Label] AS TagName
                                         FROM Recipe r 
-                                       LEFT JOIN UserProfile u on u.Id = r.UserProfileId
-                                       WHERE r.Id = @id";
+                                        LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
+                                        LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
+                                        LEFT JOIN UserProfile u on u.Id = r.UserProfileId
+                                        WHERE r.Id = @id";
+
 
                         DbUtils.AddParameter(cmd, "@id", id);
 
@@ -72,10 +79,11 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                     Title = DbUtils.GetString(reader, "Title"),
                                     Directions = DbUtils.GetString(reader, "Directions"),
                                     ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                    //Profile = new UserProfile()
-                                    //{
-                                    //    Name = DbUtils.GetString(reader, "Name"),
-                                    //}
+                                    Tag = new Tag()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "TagId"),
+                                        Label = DbUtils.GetString(reader, "TagName"),
+                                    }
                                 };
                             }
                             return recipe;
