@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using GeorgesRecipeRoomFullStack.Repositories;
 using GeorgesRecipeRoomFullStack.Models;
-using System.Collections.Generic;
-using System.Security.Claims;
+
 
 namespace GeorgesRecipeRoomFullStack.Controllers
 {
@@ -13,12 +11,12 @@ namespace GeorgesRecipeRoomFullStack.Controllers
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
-        private readonly ITagRepository _tagRepository;
+       
 
-        public UserProfileController(IUserProfileRepository userProfileRepository, ITagRepository tagRepository)
+        public UserProfileController(IUserProfileRepository userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
-            _tagRepository = tagRepository;
+           
         }
 
         [HttpGet("{firebaseUserId}")]
@@ -33,9 +31,9 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
             if (userProfile == null)
             {
-                return NotFound();
+                return NotFound(false);
             }
-            return Ok();
+            return Ok(true);
         }
 
         [HttpPost]

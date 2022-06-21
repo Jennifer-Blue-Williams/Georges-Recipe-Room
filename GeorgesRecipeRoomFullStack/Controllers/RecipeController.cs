@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using GeorgesRecipeRoomFullStack.Repositories;
 using GeorgesRecipeRoomFullStack.Models;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 namespace GeorgesRecipeRoomFullStack.Controllers
 {
@@ -34,9 +31,7 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Recipe recipe = _recipeRepo.GetRecipe(id);
-            //List<Tag> tags = _tagRepo.GetTagsByRecipe(id);
-            //recipe.Tags = tags;
+            Recipe recipe = _recipeRepo.GetRecipe(id);        
             return Ok(recipe);
         }
 
@@ -56,8 +51,8 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         [HttpPost]
         public IActionResult Post(Recipe recipe)
         {
-            //UserProfile currentUser = GetCurrentUserProfile();
-            //recipe.UserProfileId = currentUser.Id;
+            UserProfile currentUser = GetCurrentUserProfile();
+            recipe.UserProfileId = currentUser.Id;
             _recipeRepo.Add(recipe);
             int newRecipeId = recipe.Id;
             foreach (int tagId in recipe.SelectedTagIds)
@@ -68,9 +63,8 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok(recipe);
         }
 
-        [HttpPut("{id}")]
-
-        public IActionResult Update(int id, Recipe recipe)
+        [HttpPut]
+        public IActionResult Update(Recipe recipe)
         {
             _recipeRepo.Update(recipe);
             int recipeId = recipe.Id;
@@ -81,10 +75,10 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             }
             return Ok(recipe);
         }
-        //private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _userRepo.GetByFirebaseUserId(firebaseUserId);
-        //}
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userRepo.GetByFirebaseUserId(firebaseUserId);
+        }
     }
 }

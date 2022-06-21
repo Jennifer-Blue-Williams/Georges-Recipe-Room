@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using GeorgesRecipeRoomFullStack.Repositories;
 using GeorgesRecipeRoomFullStack.Models;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+
 
 namespace GeorgesRecipeRoomFullStack.Controllers
 {

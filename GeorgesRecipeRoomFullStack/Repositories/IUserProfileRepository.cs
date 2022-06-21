@@ -5,8 +5,8 @@ namespace GeorgesRecipeRoomFullStack.Repositories
 {
     public interface IUserProfileRepository
     {
-        void Add(UserProfile userProfile);
         UserProfile GetByFirebaseUserId(string firebaseUserId);       
+        void Add(UserProfile userProfile);
         
     }
 }

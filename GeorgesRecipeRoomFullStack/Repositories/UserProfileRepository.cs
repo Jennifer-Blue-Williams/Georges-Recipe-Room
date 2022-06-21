@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using GeorgesRecipeRoomFullStack.Models;
 using GeorgesRecipeRoomFullStack.Utils;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace GeorgesRecipeRoomFullStack.Repositories
