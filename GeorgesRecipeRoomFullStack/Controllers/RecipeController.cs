@@ -39,15 +39,16 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            Recipe recipe = _recipeRepo.GetRecipe(id);        
+            Recipe recipe = _recipeRepo.GetRecipe(id);
+            recipe.Tags = _tagRepo.GetTagsByRecipe(recipe.Id);
             return Ok(recipe);
         }
 
-        [HttpGet("Edit/{id}")]
-        public IActionResult GetRecipeToEdit(int id)
-        {
-            return Ok(_recipeRepo.GetToEdit(id));
-        }
+        //[HttpGet("Edit/{id}")]
+        //public IActionResult GetRecipeToEdit(int id)
+        //{
+        //    return Ok(_recipeRepo.GetToEdit(id));
+        //}
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

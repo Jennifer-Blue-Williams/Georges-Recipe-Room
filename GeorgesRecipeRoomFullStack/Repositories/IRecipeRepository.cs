@@ -11,6 +11,6 @@ namespace GeorgesRecipeRoomFullStack.Repositories
         void Add(Recipe recipe);
         void Update(Recipe recipe);
         void AddRecipeTags(int tagId, int recipeId);
-        Recipe GetToEdit(int id);
+        //Recipe GetToEdit(int id);
     }
 }

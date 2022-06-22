@@ -30,11 +30,11 @@ export default function Header({ isLoggedIn }) {
             {isLoggedIn && (
               <>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
+                  <NavLink href="/recipes">My Recipes</NavLink>
                 </NavItem>
 
                 <NavItem>
-                  <NavLink href="/recipes">My Recipes</NavLink>
+                  <NavLink href="/recipes/create">New Recipe</NavLink>
                 </NavItem>
               </>
             )}

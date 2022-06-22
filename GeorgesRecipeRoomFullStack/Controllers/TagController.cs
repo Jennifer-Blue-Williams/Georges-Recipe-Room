@@ -24,5 +24,7 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             List<Tag> tags = _tagRepo.GetAllTags();
             return Ok(tags);
         }
+
+
     }
 }
