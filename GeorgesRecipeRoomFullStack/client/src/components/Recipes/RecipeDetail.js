@@ -37,7 +37,13 @@ const RecipeDetails = () => {
           <div>
             Recipe Tags:
             <ul>
-              <p>{recipe.tag}</p>
+              <p>
+                {recipe.tags
+                  .map((tag) => {
+                    return tag.label;
+                  })
+                  .join(", ")}
+              </p>
             </ul>
           </div>
         </CardFooter>

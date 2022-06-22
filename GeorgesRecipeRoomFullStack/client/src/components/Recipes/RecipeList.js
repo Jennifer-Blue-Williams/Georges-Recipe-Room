@@ -3,12 +3,18 @@ import Recipe from "./Recipe";
 import { getAllRecipes } from "../../modules/recipeManager";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
+import { deleteRecipe } from "../../modules/recipeManager";
+import { FormGroup, Input, Label, Button, Form } from "reactstrap";
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
 
   const getRecipes = () => {
     getAllRecipes().then((recipes) => setRecipes(recipes));
+  };
+
+  const removeRecipe = (id) => {
+    deleteRecipe(id).then(getRecipes());
   };
 
   useEffect(() => {
@@ -24,12 +30,20 @@ const RecipeList = () => {
             return (
               <ListGroupItem key={recipe.id}>
                 <Recipe recipe={recipe} />
-                <h4>Tags:</h4>
+                {/* <h4>Tags:</h4>
                 {recipe.tags.map((tag) => (
                   <p>{tag.label}</p>
-                ))}
+                ))} */}
 
                 <Link to={`/recipes/${recipe.id}`}>Details</Link>
+                <div>
+                  <Button
+                    className="btn btn-primary"
+                    onClick={() => removeRecipe(recipe.id)}
+                  >
+                    Delete
+                  </Button>
+                </div>
               </ListGroupItem>
             );
           })}

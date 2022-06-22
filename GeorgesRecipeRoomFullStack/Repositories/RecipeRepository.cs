@@ -17,10 +17,8 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, u.Name, t.Id AS TagId, T.[Label] AS TagName
+                    cmd.CommandText = @"SELECT r.Id AS recipeId, r.Title, r.Directions, r.ImageUrl, u.Name
                                         FROM Recipe r 
-                                        LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
-                                        LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
                                         LEFT JOIN UserProfile u on u.Id = r.UserProfileId
                                         Where u.firebaseUserId = @firebaseId";
 
@@ -34,7 +32,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                         {
                             recipes.Add(new Recipe()
                             {
-                                Id = DbUtils.GetInt(reader, "Id"),
+                                Id = DbUtils.GetInt(reader, "recipeId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Directions = DbUtils.GetString(reader, "Directions"),
                                 ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
@@ -55,11 +53,8 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                     conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl, r.UserProfileId, u.Name, t.Id AS TagId, T.[Label] AS TagName
+                        cmd.CommandText = @"SELECT r.Id, r.Title, r.Directions, r.ImageUrl
                                         FROM Recipe r 
-                                        LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
-                                        LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
-                                        LEFT JOIN UserProfile u on u.Id = r.UserProfileId
                                         WHERE r.Id = @id";
 
 

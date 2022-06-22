@@ -6,7 +6,13 @@ const Recipe = ({ recipe }) => {
     <Card>
       <CardBody>
         <CardTitle tag="h1">{recipe.title}</CardTitle>
-        <CardText>{recipe.directions}</CardText>
+        {/* <CardText>{recipe.imageUrl}</CardText> */}
+        <img
+          src="{recipe.imageUrl}"
+          alt="Food Image"
+          width="500"
+          height="600"
+        ></img>
       </CardBody>
     </Card>
   );

@@ -30,10 +30,6 @@ export default function Header({ isLoggedIn }) {
             {isLoggedIn && (
               <>
                 <NavItem>
-                  <NavLink href="/">Home</NavLink>
-                </NavItem>
-
-                <NavItem>
                   <NavLink href="/recipes">My Recipes</NavLink>
                 </NavItem>
 
