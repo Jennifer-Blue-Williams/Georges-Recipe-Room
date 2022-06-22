@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import {
   Card,
   CardBody,
+  Button,
   CardFooter,
   CardSubtitle,
   CardText,
@@ -32,7 +33,8 @@ const RecipeDetails = () => {
         <CardSubtitle className="mb-2 text-muted" tag="h2">
           {recipe.directions}
         </CardSubtitle>
-        <CardText>{recipe.imageUrl}</CardText>
+        {/* <CardText>{recipe.imageUrl}</CardText> */}
+        <img src={recipe.imageUrl} alt="Food Image" width="100"></img>
         <CardFooter>
           <div>
             Recipe Tags:
@@ -47,6 +49,9 @@ const RecipeDetails = () => {
             </ul>
           </div>
         </CardFooter>
+        <Link to={`/recipes/edit/${recipeId}`}>
+          <Button>Edit</Button>
+        </Link>
       </CardBody>
     </Card>
   );
