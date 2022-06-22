@@ -10,7 +10,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
     {
         public RecipeRepository(IConfiguration configuration) : base(configuration) { }
 
-        public List<Recipe> GetAllRecipes()
+        public List<Recipe> GetAllRecipes(string firebaseId)
         {
             using (var conn = Connection)
             {
@@ -22,7 +22,9 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                         LEFT JOIN RecipeTag ON RecipeTag.RecipeId = r.Id
                                         LEFT JOIN Tag t ON RecipeTag.TagId = t.Id
                                         LEFT JOIN UserProfile u on u.Id = r.UserProfileId
-                                        Where u.Id = r.UserProfileId";
+                                        Where u.firebaseUserId = @firebaseId";
+
+                    cmd.Parameters.AddWithValue("@firebaseId", firebaseId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -36,12 +38,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Directions = DbUtils.GetString(reader, "Directions"),
                                 ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                Tag = new Tag()
-                                {
-                                    Id = DbUtils.GetInt(reader, "TagId"),
-                                    Label = DbUtils.GetString(reader, "TagName"),
-                                },
-                               
+                                Tags = new List<Tag>(),                             
                             }) ;
                         }
 
@@ -80,11 +77,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                                     Title = DbUtils.GetString(reader, "Title"),
                                     Directions = DbUtils.GetString(reader, "Directions"),
                                     ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
-                                    Tag = new Tag()
-                                    {
-                                        Id = DbUtils.GetInt(reader, "TagId"),
-                                        Label = DbUtils.GetString(reader, "TagName"),
-                                    }
+                                    Tags = new List<Tag>(),
                                 };
                             }
                             return recipe;

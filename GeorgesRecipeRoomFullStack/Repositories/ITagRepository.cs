@@ -7,5 +7,6 @@ namespace GeorgesRecipeRoomFullStack.Repositories
     {
         List<Tag> GetAllTags();
         void ResetTags(int recipeId);
+        List<Tag> GetTagsByRecipe(int id);
     }
 }

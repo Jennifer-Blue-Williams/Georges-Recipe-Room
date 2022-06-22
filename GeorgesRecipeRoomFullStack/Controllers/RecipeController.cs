@@ -3,6 +3,8 @@ using GeorgesRecipeRoomFullStack.Repositories;
 using GeorgesRecipeRoomFullStack.Models;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
 namespace GeorgesRecipeRoomFullStack.Controllers
 {
 
@@ -22,9 +24,15 @@ namespace GeorgesRecipeRoomFullStack.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetAll()
         {
-            List<Recipe> recipes = _recipeRepo.GetAllRecipes();
+            var firebaseId = User.FindFirst(claim => claim.Type == "user_id").Value;
+            List<Recipe> recipes = _recipeRepo.GetAllRecipes(firebaseId);
+            foreach (Recipe recipe in recipes)
+            {
+                recipe.Tags = _tagRepo.GetTagsByRecipe(recipe.Id);
+            }
             return Ok(recipes);
         }
 

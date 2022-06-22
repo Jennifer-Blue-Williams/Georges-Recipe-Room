@@ -5,15 +5,17 @@ import { postRecipe } from "../../modules/recipeManager";
 import { getAllTags } from "../../modules/tagManager";
 
 const RecipeForm = () => {
-  const history = useHistory();
-  const emptyRecipe = {
-    Title: "",
-    Directions: "",
-    ImageUrl: "",
-    SelectedTagIds: new setRecipe(),
-  };
-  const [recipe, setRecipe] = useState(emptyRecipe);
+  const [recipe, setRecipe] = useState({});
   const [tags, setTags] = useState([]);
+
+  const history = useHistory();
+
+  // const emptyRecipe = {
+  //   Title: "",
+  //   Directions: "",
+  //   ImageUrl: "",
+  //   SelectedTagIds: new setRecipe(),
+  // };
 
   const getTags = () => {
     getAllTags().then((tags) => setTags(tags));

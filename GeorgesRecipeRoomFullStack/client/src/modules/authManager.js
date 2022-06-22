@@ -15,7 +15,8 @@ const _doesUserExist = (firebaseUserId) => {
 };
 
 const _saveUser = (userProfile) => {
-  return getToken().then((token) =>
+  return getToken().then((token) => {
+    console.log(token);
     fetch(_apiUrl, {
       method: "POST",
       headers: {
@@ -23,8 +24,8 @@ const _saveUser = (userProfile) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userProfile),
-    }).then((resp) => resp.json())
-  );
+    }).then((resp) => resp.json());
+  });
 };
 
 export const getToken = () => firebase.auth().currentUser.getIdToken();
@@ -35,6 +36,7 @@ export const login = (email, pw) => {
     .signInWithEmailAndPassword(email, pw)
     .then((signInResponse) => _doesUserExist(signInResponse.user.uid))
     .then((doesUserExist) => {
+      getToken().then((token) => console.log(token));
       if (!doesUserExist) {
         // If we couldn't find the user in our app's database, we should logout of firebase
         logout();
