@@ -17,8 +17,9 @@ namespace GeorgesRecipeRoomFullStack.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Label
-                                        FROM Tag";
+                    cmd.CommandText = @"SELECT TagId, Label
+                                        FROM Tag
+                                        LEFT JOIN RecipeTag ON RecipeTag.TagId = Tag.Id";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {

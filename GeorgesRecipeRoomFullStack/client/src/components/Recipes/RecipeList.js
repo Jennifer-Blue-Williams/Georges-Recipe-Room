@@ -20,9 +20,15 @@ const RecipeList = () => {
       <div className="row justify-content-center">
         <ListGroup>
           {recipes.map((recipe) => {
+            console.log(recipe);
             return (
               <ListGroupItem key={recipe.id}>
                 <Recipe recipe={recipe} />
+                <h4>Tags:</h4>
+                {recipe.tags.map((tag) => (
+                  <p>{tag.label}</p>
+                ))}
+
                 <Link to={`/recipes/${recipe.id}`}>Details</Link>
               </ListGroupItem>
             );

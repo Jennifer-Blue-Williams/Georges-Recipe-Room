@@ -43,11 +43,11 @@ namespace GeorgesRecipeRoomFullStack.Controllers
             return Ok(recipe);
         }
 
-        [HttpGet("Edit/{id}")]
-        public IActionResult GetRecipeToEdit(int id)
-        {
-            return Ok(_recipeRepo.GetToEdit(id));
-        }
+        //[HttpGet("Edit/{id}")]
+        //public IActionResult GetRecipeToEdit(int id)
+        //{
+        //    return Ok(_recipeRepo.GetToEdit(id));
+        //}
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

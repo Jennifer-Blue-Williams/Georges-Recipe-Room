@@ -5,17 +5,17 @@ import { postRecipe } from "../../modules/recipeManager";
 import { getAllTags } from "../../modules/tagManager";
 
 const RecipeForm = () => {
-  const [recipe, setRecipe] = useState({});
-  const [tags, setTags] = useState([]);
-
   const history = useHistory();
 
-  // const emptyRecipe = {
-  //   Title: "",
-  //   Directions: "",
-  //   ImageUrl: "",
-  //   SelectedTagIds: new setRecipe(),
-  // };
+  const emptyRecipe = {
+    Title: "",
+    Directions: "",
+    ImageUrl: "",
+    SelectedTagIds: new Set(),
+  };
+
+  const [recipe, setRecipe] = useState(emptyRecipe);
+  const [tags, setTags] = useState([]);
 
   const getTags = () => {
     getAllTags().then((tags) => setTags(tags));
@@ -45,24 +45,11 @@ const RecipeForm = () => {
   };
 
   const SubmitButton = () => {
-    if (
-      recipe.Title &&
-      recipe.Directions &&
-      recipe.ImageUrl &&
-      recipe.SelectedTagIds.length > 0
-    ) {
-      return (
-        <Button className="btn btn-primary" onClick={handleSave}>
-          Submit
-        </Button>
-      );
-    } else {
-      return (
-        <Button className="btn btn-primary" disabled>
-          Please enter all information
-        </Button>
-      );
-    }
+    return (
+      <Button className="btn btn-primary" onClick={handleSave}>
+        Submit
+      </Button>
+    );
   };
 
   const handleTagCheck = (evt) => {
@@ -79,57 +66,63 @@ const RecipeForm = () => {
   };
 
   return (
-    <Form>
-      <FormGroup>
-        <Label for="Title">Title</Label>
-        <Input
-          type="text"
-          name="Title"
-          id="Title"
-          placeholder="Title"
-          value={recipe.Title}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="Directions">Directions</Label>
-        <Input
-          type="text"
-          name="Directions"
-          id="Directions"
-          placeholder="Directions"
-          value={recipe.Directions}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="ImageUrl">ImageUrl</Label>
-        <Input
-          type="image"
-          name="ImageUrl"
-          id="ImageUrl"
-          placeholder="ImageUrl"
-          value={recipe.ImageUrl}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <div>
-        Please select tag(s) for your recipe:
-        {tags.map((tag) => {
-          return (
-            <div>
-              <input
-                type="checkbox"
-                value={tag.id}
-                onChange={(evt) => handleTagCheck(evt)}
-              />
-              <label>{tag.label}</label>
-            </div>
-          );
-        })}
-      </div>
-      <SubmitButton />
-    </Form>
+    <>
+      <Form>
+        <FormGroup>
+          <Label for="Title">Title</Label>
+          <Input
+            type="text"
+            name="Title"
+            id="Title"
+            placeholder="Title"
+            value={recipe.Title}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="Directions">Directions</Label>
+          <Input
+            type="text"
+            name="Directions"
+            id="Directions"
+            placeholder="Directions"
+            value={recipe.Directions}
+            onChange={handleInputChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="ImageUrl">Food Image URL</Label>
+          <Input
+            type="text"
+            name="ImageUrl"
+            id="ImageUrl"
+            placeholder="Food Image URL here"
+            value={recipe.ImageUrl}
+            onChange={(changeEvent) => {
+              const copy = { ...recipe };
+              copy.ImageUrl = changeEvent.target.value;
+              setRecipe(copy);
+            }}
+          />
+        </FormGroup>
+        <div>
+          Select all that apply:
+          {tags.map((tag) => {
+            return (
+              <div>
+                <input
+                  type="checkbox"
+                  value={tag.id}
+                  onChange={(evt) => handleTagCheck(evt)}
+                />
+                <label>{tag.label}</label>
+              </div>
+            );
+          })}
+        </div>
+        <SubmitButton />
+      </Form>
+    </>
   );
 };
 

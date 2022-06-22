@@ -35,16 +35,9 @@ const RecipeDetails = () => {
         <CardText>{recipe.imageUrl}</CardText>
         <CardFooter>
           <div>
-            <Link to={`/profile/${recipe.profile.name}`}>
-              Recipe made by {recipe.profile.name}
-            </Link>
-          </div>
-          <div>
-            Recipe Tags:{" "}
+            Recipe Tags:
             <ul>
-              {recipe.tags.map((tag) => {
-                return <li>{tag.label}</li>;
-              })}
+              <p>{recipe.tag}</p>
             </ul>
           </div>
         </CardFooter>

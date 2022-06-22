@@ -36,6 +36,10 @@ export default function Header({ isLoggedIn }) {
                 <NavItem>
                   <NavLink href="/recipes">My Recipes</NavLink>
                 </NavItem>
+
+                <NavItem>
+                  <NavLink href="/recipes/create">New Recipe</NavLink>
+                </NavItem>
               </>
             )}
           </Nav>
