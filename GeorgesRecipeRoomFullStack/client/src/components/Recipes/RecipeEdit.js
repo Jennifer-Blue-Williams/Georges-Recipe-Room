@@ -9,6 +9,7 @@ const EditRecipe = () => {
   const history = useHistory();
   const { recipeId } = useParams();
   const emptyRecipe = {
+    Id: recipeId,
     Title: "",
     Directions: "",
     InsImageUrl: "",
@@ -71,7 +72,7 @@ const EditRecipe = () => {
         <Input
           type="text"
           name="title"
-          id="name"
+          id="title"
           placeholder="Title"
           value={recipe.title}
           onChange={handleInputChange}
@@ -101,17 +102,16 @@ const EditRecipe = () => {
       </FormGroup>
 
       <div>
-        Please select tag(s) for your recipe:
+        Select all that apply:
         {tags.map((tag) => {
           return (
             <div>
               <input
                 type="checkbox"
-                checked={recipe.SelectedTagIds.has(tag.id)}
                 value={tag.id}
                 onChange={(evt) => handleTagCheck(evt)}
               />
-              <label>{tag.name}</label>
+              <label>{tag.label}</label>
             </div>
           );
         })}
