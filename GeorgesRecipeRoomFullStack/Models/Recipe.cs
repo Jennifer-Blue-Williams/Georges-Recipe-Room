@@ -21,7 +21,7 @@ namespace GeorgesRecipeRoomFullStack.Models
         public List<Tag> Tags { get; set; }
         public int UserProfileId { get; set; }
         public List<int> SelectedTagIds { get; set; }
-        public Tag Tag { get; internal set; }
+        //public Tag Tag { get; internal set; }
        
     }
 }

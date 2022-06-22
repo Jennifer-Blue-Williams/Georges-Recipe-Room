@@ -5,7 +5,7 @@ namespace GeorgesRecipeRoomFullStack.Repositories
 {
     public interface IRecipeRepository
     {
-        List<Recipe> GetAllRecipes();
+        List<Recipe> GetAllRecipes(string firebaseId);
         Recipe GetRecipe(int id);
         void Delete(int id);
         void Add(Recipe recipe);

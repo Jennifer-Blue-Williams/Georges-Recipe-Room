@@ -11,7 +11,7 @@ import {
   NavLink,
 } from "reactstrap";
 import { logout } from "../modules/authManager";
-import { register } from "../modules/authManager";
+// import { register } from "../modules/authManager";
 
 export default function Header({ isLoggedIn }) {
   const history = useHistory();
