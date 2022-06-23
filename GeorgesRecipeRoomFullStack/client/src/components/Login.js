@@ -43,7 +43,9 @@ export default function Login() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Button>Login</Button>
+                  <Button className="btn btn-primary submitButton">
+                    Login
+                  </Button>
                 </FormGroup>
                 <em>
                   New Chef?{" "}

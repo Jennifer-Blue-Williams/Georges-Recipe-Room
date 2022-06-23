@@ -67,7 +67,9 @@ export default function Register() {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <Button>Register</Button>
+                  <Button className="btn btn-primary submitButton">
+                    Register
+                  </Button>
                 </FormGroup>
               </fieldset>
             </Form>

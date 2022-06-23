@@ -25,7 +25,7 @@ const RecipeList = () => {
       <Row>
         <Col className="xs-8">
           <div className="recipeCard">
-            <ListGroup horizontal>
+            <ListGroup>
               {recipes.map((recipe) => {
                 console.log(recipe);
                 return (
@@ -39,29 +39,31 @@ const RecipeList = () => {
                               <Recipe recipe={recipe} />
                             </Col>
                           </Row>
+                          <ListGroup horizontal={"sm"} className="my-2">
+                            {recipe.tags.map((tag) => (
+                              <ListGroupItem className="border-0" key={tag.id}>
+                                {tag.label}
+                              </ListGroupItem>
+                            ))}
+                          </ListGroup>
                           <Row>
-                            <div classname="tags">
-                              {recipe.tags.map((tag) => (
-                                <Col className="xs-2">
-                                  <p>{tag.label}</p>
-                                </Col>
-                              ))}
-                            </div>
+                            <Col className="xs-1"></Col>
+                            <Col>
+                              <Button
+                                className="btn btn-primary submitButton"
+                                href={`/recipes/${recipe.id}`}
+                              >
+                                View
+                              </Button>
+                              <Button
+                                className="btn btn-primary submitButton"
+                                onClick={() => removeRecipe(recipe.id)}
+                              >
+                                Delete
+                              </Button>
+                            </Col>
+                            <Col className="xs-1"></Col>
                           </Row>
-                          <Button
-                            className="btn btn-primary submitButton"
-                            href={`/recipes/${recipe.id}`}
-                          >
-                            View
-                          </Button>
-                          <div>
-                            <Button
-                              className="btn btn-primary submitButton"
-                              onClick={() => removeRecipe(recipe.id)}
-                            >
-                              Delete
-                            </Button>
-                          </div>
                         </Col>
                         <Col className="xs-2"></Col>
                       </Row>

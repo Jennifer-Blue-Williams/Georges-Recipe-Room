@@ -57,6 +57,10 @@ a {
   margin: 0 auto;
 }
 
+.card-subtitle {
+  margin-top: 15px;
+}
+
 img {
   border-radius: 10px;
 }

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import "../../../src/index.css";
 import {
   Card,
+  ListGroup,
+  ListGroupItem,
   CardBody,
   Button,
   CardFooter,
@@ -42,22 +44,25 @@ const RecipeDetails = () => {
                   {recipe.directions}
                 </CardSubtitle>
                 <CardFooter>
-                  <div>
-                    Recipe Tags:
-                    <ul>
-                      <p>
-                        {recipe.tags
-                          .map((tag) => {
-                            return tag.label;
-                          })
-                          .join(", ")}
-                      </p>
-                    </ul>
-                  </div>
+                  <ListGroup horizontal={"sm"} className="my-2">
+                    {recipe.tags.map((tag) => (
+                      <ListGroupItem className="border-0" key={tag.id}>
+                        {tag.label}
+                      </ListGroupItem>
+                    ))}
+                  </ListGroup>
                 </CardFooter>
-                <Link to={`/recipes/edit/${recipeId}`}>
-                  <Button className="btn btn-primary submitButton">Edit</Button>
-                </Link>
+                <Row>
+                  <Col className="xs-1"></Col>
+                  <Col>
+                    <Link to={`/recipes/edit/${recipeId}`}>
+                      <Button className="btn btn-primary submitButton">
+                        Edit
+                      </Button>
+                    </Link>
+                  </Col>
+                  <Col className="xs-1"></Col>
+                </Row>
               </CardBody>
             </Card>
           </div>
