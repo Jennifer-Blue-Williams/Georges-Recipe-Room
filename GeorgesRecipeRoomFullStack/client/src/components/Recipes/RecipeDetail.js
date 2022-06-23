@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { getRecipeDetailsById } from "../../modules/recipeManager";
 import { useParams } from "react-router-dom";
+import "../../../src/index.css";
 import {
   Card,
   CardBody,
   Button,
   CardFooter,
   CardSubtitle,
-  CardText,
   CardTitle,
+  Col,
+  Row,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -27,33 +29,41 @@ const RecipeDetails = () => {
     return null;
   }
   return (
-    <Card style={{ margin: "1rem" }}>
-      <CardBody>
-        <CardTitle tag="h1">{recipe.title}</CardTitle>
-        <CardSubtitle className="mb-2 text-muted" tag="h2">
-          {recipe.directions}
-        </CardSubtitle>
-        {/* <CardText>{recipe.imageUrl}</CardText> */}
-        <img src={recipe.imageUrl} alt="Food Image" width="100"></img>
-        <CardFooter>
-          <div>
-            Recipe Tags:
-            <ul>
-              <p>
-                {recipe.tags
-                  .map((tag) => {
-                    return tag.label;
-                  })
-                  .join(", ")}
-              </p>
-            </ul>
+    <div className="container">
+      <Row>
+        <Col className="xs-8">
+          <div className="recipeCard">
+            <Card style={{ margin: "2rem", width: "500px" }}>
+              <CardBody>
+                <CardTitle className="">{recipe.title}</CardTitle>
+                {/* <CardText>{recipe.imageUrl}</CardText> */}
+                <img src={recipe.imageUrl} alt="Food Image" width="250"></img>
+                <CardSubtitle className="mb-2 text-muted" tag="h2">
+                  {recipe.directions}
+                </CardSubtitle>
+                <CardFooter>
+                  <div>
+                    Recipe Tags:
+                    <ul>
+                      <p>
+                        {recipe.tags
+                          .map((tag) => {
+                            return tag.label;
+                          })
+                          .join(", ")}
+                      </p>
+                    </ul>
+                  </div>
+                </CardFooter>
+                <Link to={`/recipes/edit/${recipeId}`}>
+                  <Button className="btn btn-primary submitButton">Edit</Button>
+                </Link>
+              </CardBody>
+            </Card>
           </div>
-        </CardFooter>
-        <Link to={`/recipes/edit/${recipeId}`}>
-          <Button>Edit</Button>
-        </Link>
-      </CardBody>
-    </Card>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Recipe from "./Recipe";
 import { getAllRecipes } from "../../modules/recipeManager";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { ListGroup, ListGroupItem, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import { deleteRecipe } from "../../modules/recipeManager";
-import { FormGroup, Input, Label, Button, Form } from "reactstrap";
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
@@ -23,32 +22,57 @@ const RecipeList = () => {
 
   return (
     <div className="container">
-      <div className="row justify-content-center">
-        <ListGroup>
-          {recipes.map((recipe) => {
-            console.log(recipe);
-            return (
-              <ListGroupItem key={recipe.id}>
-                <Recipe recipe={recipe} />
-                {/* <h4>Tags:</h4>
-                {recipe.tags.map((tag) => (
-                  <p>{tag.label}</p>
-                ))} */}
-
-                <Link to={`/recipes/${recipe.id}`}>Details</Link>
-                <div>
-                  <Button
-                    className="btn btn-primary"
-                    onClick={() => removeRecipe(recipe.id)}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </ListGroupItem>
-            );
-          })}
-        </ListGroup>
-      </div>
+      <Row>
+        <Col className="xs-8">
+          <div className="recipeCard">
+            <ListGroup horizontal>
+              {recipes.map((recipe) => {
+                console.log(recipe);
+                return (
+                  <div className="card">
+                    <ListGroupItem key={recipe.id}>
+                      <Row>
+                        <Col className="xs-2"></Col>
+                        <Col className="xs-8">
+                          <Row>
+                            <Col>
+                              <Recipe recipe={recipe} />
+                            </Col>
+                          </Row>
+                          <Row>
+                            <div classname="tags">
+                              {recipe.tags.map((tag) => (
+                                <Col className="xs-2">
+                                  <p>{tag.label}</p>
+                                </Col>
+                              ))}
+                            </div>
+                          </Row>
+                          <Button
+                            className="btn btn-primary submitButton"
+                            href={`/recipes/${recipe.id}`}
+                          >
+                            View
+                          </Button>
+                          <div>
+                            <Button
+                              className="btn btn-primary submitButton"
+                              onClick={() => removeRecipe(recipe.id)}
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        </Col>
+                        <Col className="xs-2"></Col>
+                      </Row>
+                    </ListGroupItem>
+                  </div>
+                );
+              })}
+            </ListGroup>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };

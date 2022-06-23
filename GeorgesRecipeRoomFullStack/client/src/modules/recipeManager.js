@@ -1,7 +1,6 @@
 import { getToken } from "./authManager";
 
 const _apiUrl = "/api/Recipe";
-// This is using GetAllRecipes by firebaseId and is used in RecipeList component
 export const getAllRecipes = () => {
   return getToken().then((token) => {
     return fetch(_apiUrl, {
@@ -65,23 +64,6 @@ export const postRecipe = (recipe) => {
     });
   });
 };
-
-// export const getRecipeToEdit = (id) => {
-//   return getToken().then((token) => {
-//     return fetch(`${_apiUrl}/ToEdit/${id}`, {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }).then((resp) => {
-//       if (resp.ok) {
-//         return resp.json();
-//       } else {
-//         throw new Error("An error occured retrieving recipe details");
-//       }
-//     });
-//   });
-// };
 
 export const editRecipeById = (recipe) => {
   return getToken().then((token) => {

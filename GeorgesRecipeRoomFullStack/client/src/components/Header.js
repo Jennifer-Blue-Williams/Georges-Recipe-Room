@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { NavLink as RRNavLink } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -11,7 +10,7 @@ import {
   NavLink,
 } from "reactstrap";
 import { logout } from "../modules/authManager";
-// import { register } from "../modules/authManager";
+import "../../src/index.css";
 
 export default function Header({ isLoggedIn }) {
   const history = useHistory();
@@ -23,7 +22,7 @@ export default function Header({ isLoggedIn }) {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">George's Recipe Room</NavbarBrand>
+        <NavbarBrand href="/login">George's Recipe Room</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>

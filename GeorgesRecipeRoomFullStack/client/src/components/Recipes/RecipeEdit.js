@@ -5,7 +5,7 @@ import {
   editRecipeById,
   getRecipeDetailsById,
 } from "../../modules/recipeManager";
-import { FormGroup, Input, Label, Button, Form } from "reactstrap";
+import { FormGroup, Input, Label, Button, Form, Col, Row } from "reactstrap";
 import { getAllTags } from "../../modules/tagManager";
 
 const EditRecipe = () => {
@@ -68,60 +68,75 @@ const EditRecipe = () => {
   };
 
   return (
-    <Form>
-      <FormGroup>
-        <Label for="title">Title</Label>
-        <Input
-          type="text"
-          name="title"
-          id="title"
-          placeholder="Title"
-          value={recipe.title}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="Directions">Directions</Label>
-        <Input
-          type="text"
-          name="directions"
-          id="directions"
-          placeholder="directions"
-          value={recipe.directions}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="Instructions">ImageUrl</Label>
-        <Input
-          type="text"
-          name="imageUrl"
-          id="imageUrl"
-          placeholder="imageUrl"
-          value={recipe.imageUrl}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
+    <div className="container">
+      <Row>
+        <Col className="xs-2"></Col>
+        <Col className="xs-8">
+          <div className="authFormContainer">
+            <Form>
+              <h1 className="pageTitles">Edit Your Recipe</h1>
+              <FormGroup>
+                <Label for="title">Title</Label>
+                <Input
+                  type="text"
+                  name="title"
+                  id="title"
+                  placeholder="Title"
+                  value={recipe.title}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="Directions">Directions</Label>
+                <Input
+                  type="textarea"
+                  rows="5"
+                  name="directions"
+                  id="directions"
+                  placeholder="directions"
+                  value={recipe.directions}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="Instructions">ImageUrl</Label>
+                <Input
+                  type="text"
+                  name="imageUrl"
+                  id="imageUrl"
+                  placeholder="imageUrl"
+                  value={recipe.imageUrl}
+                  onChange={handleInputChange}
+                />
+              </FormGroup>
 
-      <div>
-        Select all that apply:
-        {tags.map((tag) => {
-          return (
-            <div>
-              <input
-                type="checkbox"
-                value={tag.id}
-                onChange={(evt) => handleTagCheck(evt)}
-              />
-              <label>{tag.label}</label>
-            </div>
-          );
-        })}
-      </div>
-      <Button className="btn btn-primary" onClick={handleSave}>
-        Save Changes
-      </Button>
-    </Form>
+              <div>
+                Select all that apply:
+                {tags.map((tag) => {
+                  return (
+                    <div>
+                      <input
+                        type="checkbox"
+                        value={tag.id}
+                        onChange={(evt) => handleTagCheck(evt)}
+                      />
+                      <label>{tag.label}</label>
+                    </div>
+                  );
+                })}
+              </div>
+              <Button
+                className="btn btn-primary submitButton"
+                onClick={handleSave}
+              >
+                Save Changes
+              </Button>
+            </Form>
+          </div>
+        </Col>
+        <Col className="xs-2"></Col>
+      </Row>
+    </div>
   );
 };
 
