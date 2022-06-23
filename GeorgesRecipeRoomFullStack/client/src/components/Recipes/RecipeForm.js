@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { FormGroup, Input, Label, Button, Form } from "reactstrap";
+import { FormGroup, Input, Label, Button, Form, Col, Row } from "reactstrap";
 import { postRecipe } from "../../modules/recipeManager";
 import { getAllTags } from "../../modules/tagManager";
 
@@ -46,7 +46,7 @@ const RecipeForm = () => {
 
   const SubmitButton = () => {
     return (
-      <Button className="btn btn-primary" onClick={handleSave}>
+      <Button className="btn btn-primary submitButton" onClick={handleSave}>
         Submit
       </Button>
     );
@@ -67,61 +67,73 @@ const RecipeForm = () => {
 
   return (
     <>
-      <Form>
-        <FormGroup>
-          <Label for="Title">Title</Label>
-          <Input
-            type="text"
-            name="Title"
-            id="Title"
-            placeholder="Title"
-            value={recipe.Title}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="Directions">Directions</Label>
-          <Input
-            type="text"
-            name="Directions"
-            id="Directions"
-            placeholder="Directions"
-            value={recipe.Directions}
-            onChange={handleInputChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="ImageUrl">Food Image URL</Label>
-          <Input
-            type="text"
-            name="ImageUrl"
-            id="ImageUrl"
-            placeholder="Food Image URL here"
-            value={recipe.ImageUrl}
-            onChange={(changeEvent) => {
-              const copy = { ...recipe };
-              copy.ImageUrl = changeEvent.target.value;
-              setRecipe(copy);
-            }}
-          />
-        </FormGroup>
-        <div>
-          Select all that apply:
-          {tags.map((tag) => {
-            return (
-              <div>
-                <input
-                  type="checkbox"
-                  value={tag.id}
-                  onChange={(evt) => handleTagCheck(evt)}
-                />
-                <label>{tag.label}</label>
-              </div>
-            );
-          })}
-        </div>
-        <SubmitButton />
-      </Form>
+      <div className="container">
+        <Row>
+          <Col className="xs-2"></Col>
+          <Col className="xs-8">
+            <div className="authFormContainer">
+              <Form>
+                <h1 className="pageTitles">Add a Recipe</h1>
+                <FormGroup>
+                  <Label for="Title">Title</Label>
+                  <Input
+                    type="text"
+                    name="Title"
+                    id="Title"
+                    placeholder="Title"
+                    value={recipe.Title}
+                    onChange={handleInputChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="Directions">Directions</Label>
+                  <Input
+                    type="textarea"
+                    rows="5"
+                    name="Directions"
+                    id="Directions"
+                    placeholder="Directions"
+                    value={recipe.Directions}
+                    onChange={handleInputChange}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="ImageUrl">Food Image URL</Label>
+                  <Input
+                    type="text"
+                    name="ImageUrl"
+                    id="ImageUrl"
+                    placeholder="Food Image URL here"
+                    value={recipe.ImageUrl}
+                    onChange={(changeEvent) => {
+                      const copy = { ...recipe };
+                      copy.ImageUrl = changeEvent.target.value;
+                      setRecipe(copy);
+                    }}
+                  />
+                </FormGroup>
+                <div>
+                  Select all that apply:
+                  {tags.map((tag) => {
+                    return (
+                      <div>
+                        <input
+                          type="checkbox"
+                          value={tag.id}
+                          onChange={(evt) => handleTagCheck(evt)}
+                        />
+                        <label>{tag.label}</label>
+                      </div>
+                    );
+                  })}
+                </div>
+                <SubmitButton />
+              </Form>
+            </div>
+          </Col>
+          <Col className="xs-2"></Col>
+        </Row>
+      </div>
     </>
   );
 };
