@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { editRecipeById } from "../../modules/recipeManager";
+import {
+  editRecipeById,
+  getRecipeDetailsById,
+} from "../../modules/recipeManager";
 import { FormGroup, Input, Label, Button, Form } from "reactstrap";
 import { getAllTags } from "../../modules/tagManager";
 
@@ -9,7 +12,6 @@ const EditRecipe = () => {
   const history = useHistory();
   const { recipeId } = useParams();
   const emptyRecipe = {
-    Id: recipeId,
     Title: "",
     Directions: "",
     InsImageUrl: "",
@@ -26,12 +28,12 @@ const EditRecipe = () => {
     getTags();
   }, []);
 
-  //   useEffect(() => {
-  //     getRecipeToEdit(recipeId).then((recipe) => {
-  //       recipe.SelectedTagIds = new Set(recipe.selectedTagIds);
-  //       setRecipe(recipe);
-  //     });
-  //   }, recipeId);
+  useEffect(() => {
+    getRecipeDetailsById(recipeId).then((recipe) => {
+      recipe.SelectedTagIds = new Set(recipe.selectedTagIds);
+      setRecipe(recipe);
+    });
+  }, recipeId);
 
   const handleInputChange = (evt) => {
     const value = evt.target.value;
