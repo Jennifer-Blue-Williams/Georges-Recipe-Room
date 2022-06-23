@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+George's Recipe Room
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About George's Recipe Room
 
-## Available Scripts
+This app was created as an homage to a friend who helped me to elevate my cooking game. With this app, a user can register and log in to find a list of their recipes. The recipes can be created, edited, deleted, and an image can be added.
 
-In the project directory, you can run:
+### How is George's Recipe Room Useful?
 
-### `npm start`
+Everyone knows the first attempt at cooking a new dish can be a disaster and we usually make mental notes of how to improve it for next time. With Georges Recipe Room, you can edit the recipe every time you make it until you have acheieved the perfectly delectable dish of your dreams!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`git clone https://github.com/Jennifer-Blue-Williams/Georges-Recipe-Room.git`
 
-### `npm test`
+`npm install`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`npm start`
 
-### `npm run build`
+### Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- CSS
+- JSX
+- React
+- C#/ADO.NET
+- SQL
+- React-Bootstrap
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Acknowledgements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- A huge round of applause to Josh Barton for guiding us through the backend and helping us set the foundations to be the newest shining examples of NSS's aptly trained developers!!!
+- Monica and the Harmonicas for being so helpful throughout capstone season.
+- ALL of Cohort #53 Everyone was patient and always willing to help in a welcoming, judgement-free setting.
+- Cohort E16 for taking me in and treating me like I'd been there all year and to the many people who reached out and offered assistance!
 
-### `npm run eject`
+### Planning Documents
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[ERD](https://dbdiagram.io/d/626a279e95e7f23c618a0a35)
